@@ -1,18 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
+    <!--顶部标题栏-->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/main_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/app_name"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/pink"
+        android:background="@color/lightyellow"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--底部导航栏-->
+    <RadioGroup
+        android:id="@+id/main_rg"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/lightyellow"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <!--android:button属性用来设置为按钮不可见
+            android:drawableTop属性用来设置按钮的图片，通过drawable下的main_rb_star文件设置按钮在选中和非选中时的图片
+            android:checked属性用来设置按钮选中状态-->
+        <RadioButton
+            android:id="@+id/main_rb_star"
+            android:drawableTop="@drawable/main_rb_star"
+            style="@style/main_rb"
+            android:text="@string/label_star"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/main_rb_pair"
+            android:drawableTop="@drawable/main_rb_pair"
+            style="@style/main_rb"
+            android:text="@string/label_pair"/>
+
+        <RadioButton
+            android:id="@+id/main_rb_luck"
+            android:drawableTop="@drawable/main_rb_luck"
+            style="@style/main_rb"
+            android:text="@string/label_luck"/>
+
+        <RadioButton
+            android:id="@+id/main_rb_me"
+            android:drawableTop="@drawable/main_rb_me"
+            style="@style/main_rb"
+            android:text="@string/label_me"/>
+
+    </RadioGroup>
+
+    <!--中间部分使用布局进行占位，后续会使用Fragment替换-->
+    <LinearLayout
+        android:id="@+id/main_layout_center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/main_tv_title"
+        android:layout_above="@id/main_rg"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+</RelativeLayout>
