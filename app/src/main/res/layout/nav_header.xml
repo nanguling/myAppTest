@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="@color/lightyellow">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/headImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/header"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="30dp"/>
+
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/headImage"
+        android:text="南菇岭"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="80dp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="5dp"/>
+
+    <LinearLayout
+        android:id="@+id/autograph_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameText"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/headImage"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/autograph" />
+
+        <TextView
+            android:id="@+id/autographText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="好好念书，不学是猪"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginLeft="5dp"
+            android:maxEms="10"
+            android:ellipsize="end"
+            android:singleLine="true"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

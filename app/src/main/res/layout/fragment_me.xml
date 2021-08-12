@@ -1,15 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple"
-    tools:context=".mefrg.MeFragment">
+    android:orientation="vertical"
+    android:background="@color/bgyellow">
 
-    <!-- TODO: Update blank fragment layout -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/me_frag_cv"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/lightred"
+        android:src="@mipmap/ic_launcher_round"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/me_frag_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="白羊座"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorPrimary"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/me_frag_about"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/about_app"
+            android:textSize="20sp"
+            android:gravity="center|left"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorPrimary"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/me_frag_function"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/function"
+            android:textSize="20sp"
+            android:gravity="center|left"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorPrimary"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/me_frag_update"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/update"
+            android:textSize="20sp"
+            android:gravity="center|left"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorPrimary"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/me_frag_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/feedback"
+            android:textSize="20sp"
+            android:gravity="center|left"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>

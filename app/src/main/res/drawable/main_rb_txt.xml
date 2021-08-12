@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--文字选择器，用于指定按钮在选择和非选中状态下的文字颜色-->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true" android:drawable="@color/pink"/>
-    <item android:state_checked="false" android:drawable="@color/grey"/>
-    <item android:drawable="@color/grey"/>
+    <item android:state_checked="true" android:color="@color/pink"/>
+    <item android:state_checked="false" android:color="@color/grey"/>
 </selector>

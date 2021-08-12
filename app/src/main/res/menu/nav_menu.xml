@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/member"
+            android:icon="@drawable/huiyuan"
+            android:title="@string/member"/>
+
+        <item
+            android:id="@+id/wallet"
+            android:icon="@drawable/qianbao"
+            android:title="@string/wallet"/>
+
+        <item
+            android:id="@+id/attire"
+            android:icon="@drawable/zhuangban"
+            android:title="@string/attire"/>
+
+        <item
+            android:id="@+id/collection"
+            android:icon="@drawable/shoucang"
+            android:title="@string/collection"/>
+
+    </group>
+
+
+</menu>

@@ -1,23 +1,42 @@
 package com.example.constellation;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.constellation.bean.StarInfoBean;
 import com.example.constellation.luckfrg.LuckFragment;
 import com.example.constellation.mefrg.MeFragment;
 import com.example.constellation.pairfrg.PairFragment;
+import com.example.constellation.slidemenu.NavMenuActivity;
 import com.example.constellation.starfrg.StarFragment;
 import com.example.constellation.util.AssetsUtil;
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
-public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
     RadioGroup mainGr;
 
@@ -32,6 +51,18 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
 
     private FragmentManager fragmentManager;
 
+    NavigationView navView;
+
+    LinearLayout autographLay;
+
+    DrawerLayout drawableLayout;
+
+    TextView autographTv;
+
+    CircleImageView headerCv;
+
+    private SharedPreferences autograph;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +70,10 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         mainGr = (RadioGroup) findViewById(R.id.main_rg);
         //设置监听事件
         mainGr.setOnCheckedChangeListener(this);
+
+        autograph = getSharedPreferences("autograph", MODE_PRIVATE);
+
+        initView();
 
         //加载星座相关数据
         StarInfoBean infoBean = loadData();
@@ -59,6 +94,28 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         meFrag.setArguments(bundle);
         //将四个Fragment进行动态加载，动态加载到布局。replace   add/hide/show
         addFragmentPage();
+
+    }
+
+    private void initView() {
+        drawableLayout = (DrawerLayout) findViewById(R.id.drawablelayout);
+        navView = (NavigationView) findViewById(R.id.navView);
+        //得到滑动菜单的头部布局
+        View header = navView.inflateHeaderView(R.layout.nav_header);
+        //通过头部布局得到布局里的控件
+        autographLay = (LinearLayout) header.findViewById(R.id.autograph_layout);
+        autographTv = (TextView) header.findViewById(R.id.autographText);
+        headerCv = (CircleImageView) findViewById(R.id.main_header_cv);
+
+        //获取共享参数里的签名信息，赋值到签名中
+        autographTv.setText(autograph.getString("key",""));
+
+        //为滑动菜单设置监听事件
+        navView.setNavigationItemSelectedListener(this);
+        //为autograph设置监听事件
+        autographLay.setOnClickListener(this);
+        //为主页面的小头像设置监听事件
+        headerCv.setOnClickListener(view -> drawableLayout.openDrawer(GravityCompat.START));
     }
 
     /**
@@ -94,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         transaction.commit();
     }
 
+    /*为底部button绑定点击事件*/
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -127,4 +185,46 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         }
         transaction.commit();
     }
+
+    /*为滑动菜单每一项绑定点击事件*/
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.member:
+                Toast.makeText(MainActivity.this,"点击了我的会员",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.wallet:
+                Toast.makeText(MainActivity.this,"点击了我的钱包",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.attire:
+                Toast.makeText(MainActivity.this,"点击了我的装扮",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.collection:
+                Toast.makeText(MainActivity.this,"点击了我的收藏",Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        return true;
+    }
+
+    /*为签名绑定点击事件*/
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(MainActivity.this, NavMenuActivity.class);
+        SharedPreferences.Editor edit = autograph.edit();
+        edit.putString("key", autographTv.getText().toString());
+        edit.commit();
+        drawableLayout.closeDrawers();
+        startActivity(intent);
+    }
+
+    /**
+     * 从个签修改界面跳到主页面时，主页面一般不会执行onCreate()方法。因此在onStart()方法中进行共享参数的获取，并且赋值到个签，从而完成个签的修改
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+            autographTv.setText(autograph.getString("key",""));
+    }
+
 }

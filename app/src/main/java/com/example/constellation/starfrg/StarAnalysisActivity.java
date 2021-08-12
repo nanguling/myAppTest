@@ -47,7 +47,10 @@ public class StarAnalysisActivity extends AppCompatActivity implements View.OnCl
     //创建RecyclerView子元素的bean集合
     List<StarAnalysisBean> beanRv;
 
-    private StarAnalysisAdapter adapter;
+    //创建底布局集合
+    List<String> list;
+
+    private AddFooterViewAdapter adapter;
 
     private TextView footContent;
 
@@ -64,13 +67,15 @@ public class StarAnalysisActivity extends AppCompatActivity implements View.OnCl
 
         //初始化RecyclerView子元素的bean集合
         beanRv = new ArrayList<>();
+        //初始化底布局集合
+        list = new ArrayList<>();
         //创建LinearLayoutManager对象设置到RcyclerView中，用来指定其布局方式
         //LinearLayoutManager为线性布局
         LinearLayoutManager manager = new LinearLayoutManager(this);
         analysisRv.setLayoutManager(manager);
         //创建适配器
         //此时没有数据，因为beanRv中没有数据
-        adapter = new StarAnalysisAdapter(this, beanRv);
+        adapter = new AddFooterViewAdapter(this, new ArrayList<String>(),beanRv,list);
         analysisRv.setAdapter(adapter);
 
         //向beanRv中添加数据
@@ -130,6 +135,7 @@ public class StarAnalysisActivity extends AppCompatActivity implements View.OnCl
 
     /*向RecyclerView添加底布局*/
     private void addFootViewToRecyclerView() {
-
+        list.add(bean.getInfo());
+        adapter.notifyDataSetChanged();
     }
 }

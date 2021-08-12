@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ public class StarFragment extends Fragment {
 
     LinearLayout pointLayout;
 
-    private List<StarInfoBean.StarinfoBean> starinfo;
+    private List<StarInfoBean.StarinfoBean> beans;
 
     private StarBaseAdapter starBaseAdapter;
 
@@ -83,9 +84,9 @@ public class StarFragment extends Fragment {
         initView(view);
         Bundle bundle = getArguments();
         StarInfoBean starInfoBean = (StarInfoBean) bundle.getSerializable("info");
-        starinfo = starInfoBean.getStarinfo();//获取关于星座信息数据的集合
+        beans = starInfoBean.getStarinfo();//获取关于星座信息数据的集合
         //创建适配器
-        starBaseAdapter = new StarBaseAdapter(getContext(), starinfo);
+        starBaseAdapter = new StarBaseAdapter(getContext(), beans);
         starGv.setAdapter(starBaseAdapter);
 
         //初始化ViewPager控件
@@ -162,7 +163,7 @@ public class StarFragment extends Fragment {
         starGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                StarInfoBean.StarinfoBean bean = starinfo.get(position);
+                StarInfoBean.StarinfoBean bean = beans.get(position);
                 Intent intent = new Intent(getContext(), StarAnalysisActivity.class);
                 intent.putExtra("star",bean);
                 startActivity(intent);
