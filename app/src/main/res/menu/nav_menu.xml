@@ -22,6 +22,11 @@
             android:icon="@drawable/shoucang"
             android:title="@string/collection"/>
 
+        <item
+            android:id="@+id/quit"
+            android:icon="@drawable/tuichu"
+            android:title="@string/quit"/>
+
     </group>
 
 

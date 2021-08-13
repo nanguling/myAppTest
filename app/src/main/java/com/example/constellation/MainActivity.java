@@ -1,6 +1,7 @@
 package com.example.constellation;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -9,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -201,6 +203,19 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 break;
             case R.id.collection:
                 Toast.makeText(MainActivity.this,"点击了我的收藏",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.quit:
+                new AlertDialog.Builder(this)
+                        .setTitle("是否退出应用？")
+                        .setCancelable(false)
+                        .setPositiveButton("确认退出", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("取消", null)
+                        .show();
                 break;
         }
 
