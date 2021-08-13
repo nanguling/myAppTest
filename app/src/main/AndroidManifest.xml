@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".slidemenu.NavMenuActivity"></activity>
+        <activity android:name=".login.RegisterActivity"></activity>
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".login.FirstActivity" />
+        <activity android:name=".slidemenu.NavMenuActivity" />
         <activity android:name=".welcome.GuideActivity" />
         <activity
             android:name=".welcome.WelcomeActivity"

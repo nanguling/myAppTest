@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.constellation.MainActivity;
 import com.example.constellation.R;
+import com.example.constellation.login.FirstActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -44,7 +45,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         edit.commit();
                     }else {
                         //不是第一次，则不需要跳转引导界面
-                        intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                        intent = new Intent(WelcomeActivity.this, FirstActivity.class);
                     }
                     startActivity(intent);
                     finish();
