@@ -1,11 +1,11 @@
 package com.example.constellation.login;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.media.session.IMediaControllerCallback;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -16,7 +16,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.constellation.MainActivity;
 import com.example.constellation.R;
+import com.example.constellation.entity.User;
+
+import org.litepal.LitePal;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -165,6 +171,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case R.id.login_iv:
+                //在数据库中查询是否存在该用户
+                userName = userNameEt.getText().toString();
+                password = passwordEt.getText().toString();
+                List<User> users = LitePal.where("userName = ?", userName).find(User.class);
+                if (users.size() != 0) {
+                    List<User> users1 = LitePal.where("password = ?", password).find(User.class);
+                    if (users1.size() != 0) {
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }else {
+                        new AlertDialog.Builder(this)
+                                .setTitle("登录失败")
+                                .setMessage("帐号或密码错误，请重新输入")
+                                .show();
+                        break;
+                    }
+                }else {
+                    new AlertDialog.Builder(this)
+                                .setTitle("登录失败")
+                                .setMessage("帐号或密码错误，请重新输入")
+                                .show();
+                    break;
+                }
                 break;
             case R.id.forget_password_tv:
                 break;

@@ -2,7 +2,9 @@ package com.example.constellation.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -14,6 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.constellation.R;
+import com.example.constellation.entity.User;
+
+import org.litepal.tablemanager.Connector;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,6 +35,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        //创建用户数据库
+        Connector.getDatabase();
 
         //初始化控件
         initView();
@@ -49,9 +57,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 userName = userNameEt.getText().toString();
                 password = passwordEt.getText().toString();
                 //判断如果此时输入框中的帐号密码都不为空，则替换登录图片
-                if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password)) {
-                    registerIv.setEnabled(true);//打开图片的响应事件
-                    registerIv.setImageResource(R.drawable.login_focus);
+                if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(againPwEt.getText())) {
+                    if (password.contentEquals(againPwEt.getText())) {
+                        registerIv.setEnabled(true);//打开图片的响应事件
+                        registerIv.setImageResource(R.drawable.login_focus);
+                    }else {
+                        againPwEt.setError("两次密码不一致");
+                        registerIv.setEnabled(false);
+                        registerIv.setImageResource(R.drawable.login_normal);
+                    }
                 }else {
                     registerIv.setEnabled(false);
                     registerIv.setImageResource(R.drawable.login_normal);
@@ -73,9 +87,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 userName = userNameEt.getText().toString();
                 password = passwordEt.getText().toString();
                 //判断如果此时输入框中的帐号密码都不为空，则替换登录图片
-                if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password)) {
-                    registerIv.setEnabled(true);//打开图片的响应事件
-                    registerIv.setImageResource(R.drawable.login_focus);
+                if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(againPwEt.getText())) {
+                    if (password.contentEquals(againPwEt.getText())) {
+                        registerIv.setEnabled(true);//打开图片的响应事件
+                        registerIv.setImageResource(R.drawable.login_focus);
+                    }else {
+                        againPwEt.setError("两次密码不一致");
+                        registerIv.setEnabled(false);
+                        registerIv.setImageResource(R.drawable.login_normal);
+                    }
                 }else {
                     registerIv.setEnabled(false);
                     registerIv.setImageResource(R.drawable.login_normal);
@@ -97,9 +117,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 userName = userNameEt.getText().toString();
                 password = passwordEt.getText().toString();
                 //判断如果此时输入框中的帐号密码都不为空，则替换登录图片
-                if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password)) {
-                    registerIv.setEnabled(true);//打开图片的响应事件
-                    registerIv.setImageResource(R.drawable.login_focus);
+                if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(againPwEt.getText())) {
+                    if (password.contentEquals(againPwEt.getText())) {
+                        registerIv.setEnabled(true);//打开图片的响应事件
+                        registerIv.setImageResource(R.drawable.login_focus);
+                    }else {
+                        againPwEt.setError("两次密码不一致");
+                        registerIv.setEnabled(false);
+                        registerIv.setImageResource(R.drawable.login_normal);
+                    }
                 }else {
                     registerIv.setEnabled(false);
                     registerIv.setImageResource(R.drawable.login_normal);
@@ -190,6 +216,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.re_register_iv:
                 //将得到的帐号和密码保存在数据库
+                userName = userNameEt.getText().toString();
+                password = passwordEt.getText().toString();
+                User user = new User();
+                user.setUserName(userName);
+                user.setPassword(password);
+                user.save();
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
                 break;
         }
     }
